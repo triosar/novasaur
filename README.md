@@ -1,0 +1,34 @@
+# Novasaur
+Novasaur is an open-source Discord bot designed for use within the Nova Incorporated community.
+
+Novasaur uses Python, and makes use of the discord.py library to communicate with Discord from a Python script.
+
+It is maintained by Triosar.
+# Features
+- Extremely basic filter.
+- Blacklist system, integrated with a private Trello board.
+- Ability to universally gameban people from all Nova Incorporated games using the Lithium ingame Admin system.
+- The ability to fetch all group ranks/IDs from a Roblox group.
+
+# Contributing
+- Contributions are welcome. Much of these will be minor commands/features, but Nova Incorporated developers are free to request changes pertaining to official development, with prior agreement on the features.
+- If you wish to submit a pull request, you are free to do so, although any requested code changes will be examined for security and quality.
+- Any new features of commands should accept the pre-existing structure for event and command handlers. 
+For example:
+```py
+@bot.command()
+async def hello(ctx,*args):
+	toSend = ' '.join(args)
+	await ctx.send(toSend)
+```
+or
+```py
+@bot.event
+async def on_message(message):
+if "amogus" in str(message.content).lower():
+	await message.add_reaction("amogus")
+```
+- I am new to Github so don't expect me to be a whizz!
+
+# Credits
+A credits list is included in the code, as part of the `>credits` command.
