@@ -703,6 +703,7 @@ async def cmds(ctx):
   embedVar.add_field(name=">botbl", value="Lists all users blacklisted from using the bot (i.e. are ignored).", inline=False)
   embedVar.add_field(name=">cmds", value="This command!", inline=False)
   embedVar.add_field(name=">help", value="Lists all commands.", inline=False)
+  embedVar.add_field(name=">floppa", value="Shows floppa gif.", inline=False) ## Floppa Added to the list.
   embedVar.add_field(name=">servers", value="Lists all servers the bot is in.", inline=False)
   embedVar.add_field(name=">uptime", value="Shows how long the bot has been connected to Discord.", inline=False)
   await ctx.send(embed=embedVar)
@@ -1358,9 +1359,14 @@ async def poc(ctx,*args):
   
 @bot.command()
 async def poll(ctx,*args):
-  msg = await ctx.send(' '.join(args))
+  embed = discord.Embed(title=' '.join(args),description=f'Sent by: {ctx.message.author}',color=000000)  ## Added embed instead of message.
+  msg = await ctx.send(embed=embed)
   await msg.add_reaction("✅")
   await msg.add_reaction("❌") 
+
+@bot.command()
+async def floppa(ctx,*args):
+  await ctx.send('https://tenor.com/btFVt.gif')  ## Floppa command makes the bot more alive.
 
 @bot.command()
 async def granks(ctx,*args):
