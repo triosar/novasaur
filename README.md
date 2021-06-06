@@ -12,9 +12,9 @@ It is maintained by Triosar.
 
 # Contributing
 - Your only concern when contributing should be the `main.py` file. All other files do not make up the "core bot", and are used for various reasons, testing or otherwise.
-- Contributions are welcome. Much of these will be minor commands/features, but Nova Incorporated developers are free to request changes pertaining to official development, with prior agreement on the features.
+- Contributions are welcome. Its preferred that you focus minor commands/features, but Nova Incorporated developers are free to request changes pertaining to official development, with prior agreement on the features.
 - If you wish to submit a pull request, you are free to do so, although any requested code changes will be examined for security and quality.
-- Any new features of commands should accept the pre-existing structure for event and command handlers. 
+- Any new features or commands should accept the pre-existing structure for event and command handlers. 
 For example:
 ```py
 @bot.command()
