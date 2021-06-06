@@ -11,6 +11,7 @@ It is maintained by Triosar.
 - The ability to fetch all group ranks/IDs from a Roblox group.
 
 # Contributing
+- Your only concern when contributing should be the `main.py` file. All other files do not make up the "core bot", and are used for various reasons, testing or otherwise.
 - Contributions are welcome. Much of these will be minor commands/features, but Nova Incorporated developers are free to request changes pertaining to official development, with prior agreement on the features.
 - If you wish to submit a pull request, you are free to do so, although any requested code changes will be examined for security and quality.
 - Any new features of commands should accept the pre-existing structure for event and command handlers. 
