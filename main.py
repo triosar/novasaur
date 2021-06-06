@@ -1,3 +1,4 @@
+
 # Novasaur main file. - infinitypupper
 
 # Import modules
@@ -27,6 +28,82 @@ bot = commands.Bot(command_prefix='>',intents=intents)
 
 logging.basicConfig(filename='test.log', format='%(filename)s: %(message)s',
     level=logging.ERROR)
+
+
+s1bEmbeds = []
+s2bEmbeds = []
+s3bEmbeds = []
+# these store embeds
+
+async def blListRefresh():
+  global s1bEmbeds
+  global s2bEmbeds
+  global s3bEmbeds
+
+  s1b = []
+  s2b = []
+  s3b = []
+
+  TRELLO_APP_KEY = os.getenv('TRELLO_APP_KEY')
+  TOKEN = os.getenv('TOKEN')
+  listID = "6093ccae8f0a0a4e409fa1ce"
+  
+  trello = TrelloApi(TRELLO_APP_KEY, TOKEN)
+
+  cardList = trello.lists.get_card(listID)
+
+  # Putting each blacklisted user in stage lists.
+  for x in cardList:
+    cardName = x["name"]
+    cardNameSplit = cardName.split(":")
+    cardStage = cardNameSplit[1]
+    if str(cardStage) == "1":
+      s1b.append(cardName)
+    if str(cardStage) == "2":
+      s2b.append(cardName)
+    if str(cardStage) == "3":
+      s3b.append(cardName)
+
+
+    
+  RS = os.getenv('ROBLOSECURITY')
+  roblox = Client(RS)
+
+  counter = 1
+
+  embedVar = discord.Embed(title="S1B", description="",color=000000)
+
+  for x in s1b:
+    cardNameSplit = x.split(":")
+
+    userID = cardNameSplit[0]
+    stage = cardNameSplit[1]
+    reason = cardNameSplit[2]
+
+    user = await roblox.get_user(int(userID))
+    currentName = user.name
+
+    embedVar.add_field(name=currentName, value=reason, inline=False)
+
+    if counter == 24:
+      footCount = footCount + 1
+      embedVar.set_footer(text = str(footCount))
+      s1bEmbeds.append(embedVar)
+      embedVar.fields = []
+      counter = 1
+  s1bEmbeds.append(embedVar)
+  embedVar.fields = []
+
+  await bot.get_channel(841015343749005392).send("Blacklist Refresh for S1B done.")
+
+@bot.command()
+async def s1b(ctx):
+  await blListRefresh
+  for x in s1bEmbeds:
+    await ctx.send(embed=x)
+
+
+
 
 def clearUser(name):
   TRELLO_APP_KEY = os.getenv('TRELLO_APP_KEY')
