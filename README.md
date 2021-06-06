@@ -28,7 +28,7 @@ or
 @bot.event
 async def on_message(message):
 if "amogus" in str(message.content).lower():
-	await message.add_reaction("amogus")
+	await message.send("amogus")
 ```
 - I am new to Github so don't expect me to be a whizz!
 
