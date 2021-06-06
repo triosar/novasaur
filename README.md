@@ -1,5 +1,6 @@
 # Novasaur
 Novasaur is an open-source Discord bot designed for use within the Nova Incorporated community.
+Keep in mind my code is **very** messy, but I'll look at improving tidiness and readability in the future.
 
 Novasaur uses Python, and makes use of the discord.py library to communicate with Discord from a Python script.
 
