@@ -791,6 +791,7 @@ async def cmds(ctx):
   embedVar.add_field(name=">about", value="About le bot.", inline=False)
   embedVar.add_field(name=">admins", value="Lists all botadmins i.e. NCs, HoNOU, HoS, Nova Chairman.", inline=False)
   embedVar.add_field(name=">bark", value="Bark!", inline=False)
+  embedVar.add_field(name=">dontwoof", value="Oh no! Don't woof!", inline=False)
   embedVar.add_field(name=">botbl", value="Lists all users blacklisted from using the bot (i.e. are ignored).", inline=False)
   embedVar.add_field(name=">cmds", value="This command!", inline=False)
   embedVar.add_field(name=">help", value="Lists all commands.", inline=False)
