@@ -28,7 +28,7 @@ bot = commands.Bot(command_prefix='>',intents=intents)
 # logging.basicConfig(filename='test.log', format='%(filename)s: %(message)s',
 #     level=logging.ERROR)
 
-db["s1p"] = 0
+db["s3p"] = int(0)
 
 
 s1bEmbeds = []
@@ -250,9 +250,31 @@ async def on_raw_reaction_add(payload):
     return
   if payload.message_id != 844991560194064404:
     return
-  currentPage = db["s1p"] # get current page
+  currentPage = int(db["s3p"]) # get current page
 
-  print(payload.emoji)
+  if payload.emoji == "➡️":
+    currentPage = currentPage + 1
+    db["s3p"] = int(currentPage)
+    channel = bot.get_channel(844991540636286976)
+    message = channel.fetch_message(844991540636286976)
+
+    page = s3bEmbeds[currentPage]
+    embedVar = discord.Embed(title="S3B", description="",color=000000)
+    for key in page:
+      embedVar.add_field(name=key, value=dict[key], inline=False)
+    await message.edit(embed=embedVar)
+
+  if payload.emoji == "⬅️":
+    currentPage = currentPage - 1
+    db["s3p"] = int(currentPage)
+    channel = bot.get_channel(844991540636286976)
+    message = channel.fetch_message(844991540636286976)
+
+    page = s3bEmbeds[currentPage]
+    embedVar = discord.Embed(title="S3B", description="",color=000000)
+    for key in page:
+      embedVar.add_field(name=key, value=dict[key], inline=False)
+    await message.edit(embed=embedVar)
 
 
 
@@ -272,6 +294,8 @@ async def on_ready():
       #await server.leave() #activate this to leave all servers
     #inv = await (bot.get_channel(747581697826095260)).create_invite()
     #await user.send(inv)
+    await blListRefresh()
+    await bot.get_channel(832614393279283211).send("Blacklist refreshed...")
     await checkQ()
 
 
