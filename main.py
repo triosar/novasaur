@@ -256,30 +256,36 @@ async def on_raw_reaction_add(payload):
 
   if str(payload.emoji) == "➡️":
     print("right")
-    currentPage = currentPage + 1
-    db["s3p"] = int(currentPage)
-    channel = bot.get_channel(844991540636286976)
-    message = await channel.fetch_message(844991560194064404)
-    page = s3bEmbeds[currentPage]
-    embedVar = discord.Embed(title="S3B", description="",color=000000)
-    for key in page:
-      embedVar.add_field(name=key, value=page[key], inline=False)
-    await message.edit(embed=embedVar)
+    try:
+      currentPage = currentPage + 1
+      db["s3p"] = int(currentPage)
+      channel = bot.get_channel(844991540636286976)
+      message = await channel.fetch_message(844991560194064404)
+      page = s3bEmbeds[currentPage]
+      embedVar = discord.Embed(title="S3B", description="",color=000000)
+      for key in page:
+        embedVar.add_field(name=key, value=page[key], inline=False)
+      await message.edit(embed=embedVar)
+    except:
+      print("out of range moment")
     user = bot.get_user(payload.user_id)
     await message.remove_reaction(payload.emoji, user)
 
   if str(payload.emoji) == "⬅️":
     print("left")
-    currentPage = currentPage - 1
-    db["s3p"] = int(currentPage)
-    channel = bot.get_channel(844991540636286976)
-    message = await channel.fetch_message(844991560194064404)
+    try:
+      currentPage = currentPage - 1
+      db["s3p"] = int(currentPage)
+      channel = bot.get_channel(844991540636286976)
+      message = await channel.fetch_message(844991560194064404)
 
-    page = s3bEmbeds[currentPage]
-    embedVar = discord.Embed(title="S3B", description="",color=000000)
-    for key in page:
-      embedVar.add_field(name=key, value=page[key], inline=False)
-    await message.edit(embed=embedVar)
+      page = s3bEmbeds[currentPage]
+      embedVar = discord.Embed(title="S3B", description="",color=000000)
+      for key in page:
+        embedVar.add_field(name=key, value=page[key], inline=False)
+      await message.edit(embed=embedVar)
+    except:
+      print("out of range moment")
     user = bot.get_user(payload.user_id)
     await message.remove_reaction(payload.emoji, user)
 
