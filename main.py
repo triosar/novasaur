@@ -28,6 +28,8 @@ bot = commands.Bot(command_prefix='>',intents=intents)
 # logging.basicConfig(filename='test.log', format='%(filename)s: %(message)s',
 #     level=logging.ERROR)
 
+db["s1p"] = 0
+
 
 s1bEmbeds = []
 s2bEmbeds = []
@@ -248,7 +250,12 @@ async def on_raw_reaction_add(payload):
     return
   if payload.message_id != 844991560194064404:
     return
-  
+  currentPage = db["s1p"] # get current page
+
+  print(payload.emoji)
+
+
+
   
 
 @bot.event
