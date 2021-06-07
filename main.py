@@ -250,9 +250,11 @@ async def on_raw_reaction_add(payload):
     return
   if payload.message_id != 844991560194064404:
     return
+  print(payload.emoji)
   currentPage = int(db["s3p"]) # get current page
 
   if payload.emoji == "➡️":
+    print("right")
     currentPage = currentPage + 1
     db["s3p"] = int(currentPage)
     channel = bot.get_channel(844991540636286976)
@@ -266,6 +268,7 @@ async def on_raw_reaction_add(payload):
     await message.edit(embed=embedVar)
 
   if payload.emoji == "⬅️":
+    print("left")
     currentPage = currentPage - 1
     db["s3p"] = int(currentPage)
     channel = bot.get_channel(844991540636286976)
