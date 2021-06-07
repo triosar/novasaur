@@ -34,6 +34,8 @@ s2bEmbeds = []
 s3bEmbeds = []
 # these store embeds
 
+######################################################################################
+
 async def blListRefresh():
 
   s1b = []
@@ -74,10 +76,10 @@ async def blListRefresh():
   counter = 1
   footCount = 1
 
-  embedVar = discord.Embed(title="S3B", description="",color=000000)
-  embedVar.add_field(name="test", value="test", inline=False)
+  newPage = {}
 
   for x in s3b:
+    on24 = False
     cardNameSplit = x.split(":")
 
     userID = cardNameSplit[0]
@@ -87,35 +89,38 @@ async def blListRefresh():
     user = await roblox.get_user(int(userID))
     currentName = user.name
 
-    embedVar.add_field(name=currentName, value=reason, inline=False)
+    newPage[currentName] = reason
+    
     counter = counter + 1
     print(counter)
     if counter == 24:
       print("new page moment")
-      embedVar.set_footer(text = str(footCount))
-      print(embedVar.fields)
-      toADD = embedVar
-      s3bEmbeds.append(toADD)
+      s3bEmbeds.append(newPage)
+      newPage = {}
+
       footCount = footCount + 1
-      await bot.get_channel(841015343749005392).send(embed=embedVar)
-      embedVar.clear_fields()
+      on24 = True
+
+
       counter = 1
-  print("final",embedVar.fields)
-  s3bEmbeds.append(embedVar)
+
+  if on24:
+    s3bEmbeds.append(newPage)
   #embedVar.clear_fields()
-  print(s3bEmbeds)
-  await bot.get_channel(841015343749005392).send(embed=embedVar)
+
   await bot.get_channel(841015343749005392).send("Blacklist Refresh for S3B done.")
 
 @bot.command()
 async def s3b(ctx):
   await blListRefresh()
-  for x in s3bEmbeds:
-    print("pee",x)
-    await ctx.send(str(x.fields))
-    await ctx.send(embed=x)
+  for dict in s3bEmbeds:
+    embedVar = discord.Embed(title="S3B", description="",color=000000)
+    for key in dict:
+      embedVar.add_field(name=key, value=dict[key], inline=False)
+    await ctx.send(embed=embedVar)
+  await ctx.send(embed=x)
 
-
+######################################################################################
 
 
 def clearUser(name):
@@ -170,7 +175,7 @@ async def checkFriends(username):
 xmasTime = int(1640390400) # define christmas day as unix
 
 # Declare various lists for use.
-badwords = ['nigger','niggers','nibber','nigga','nibba','faggot','faget',' fag ','fagging','fagot','mussie','mossie',' cum','ejaculate','jerk  of','lezzo','lezbo','lezzer','lezer','lezza','leza','masturbat','molest','porn', ' rape ','rimjob','rimming','blowjob','sextoy','skank','slut','sperm','sodom','tranny','tranni','trany','trani',' wank',' wog ','testword','retard','f@g','re3tard','cunt','c u m',' c u m','hentai','ahegao','cocaine','crackhead','whore','spunk']
+badwords = ['nigger','niggers','nibber','nigga','nibba','faggot','faget',' fag ','fagging','fagot','mussie','mossie',' cum','ejaculate','jerk  of','lezzo','lezbo','lezzer','lezer','lezza','leza','masturbat','molest','porn', ' rape ','rimjob','rimming','blowjob','sextoy','skank','slut','sperm','sodom','tranny','tranni','trany','trani',' wank',' wog ','retard','f@g','re3tard','cunt','c u m',' c u m','hentai','ahegao','cocaine','crackhead','whore','spunk']
 
 botadmins = ["315193131282726914","314394344465498122","626171285491154944","691770905835077643","340167800561860618","435457720855035914"]
 #botadmin order: reis, triosar, alex, killer,sxens, dyno
