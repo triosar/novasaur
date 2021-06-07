@@ -1518,6 +1518,10 @@ async def granks(ctx,*args):
     embedVar.add_field(name=x.name, value=(x.rank), inline=False)
   await ctx.send(embed=embedVar)
 
+@bot.command()
+async def dontwoof(ctx):
+  await ctx.send("https://cdn.discordapp.com/attachments/657008895776129028/771842764894896138/Woof.mov")
+  await ctx.message.delete()
 
 keep_alive.keep_alive()
 bot.run(TOKEN)
