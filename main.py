@@ -283,7 +283,7 @@ async def on_raw_reaction_add(payload):
     channel = bot.get_channel(844991540636286976)
     message = await channel.fetch_message(844991560194064404)
 
-    if noPage == int(currentPage):
+    if int(noPage) == 1:
       user = bot.get_user(payload.user_id)
       await message.remove_reaction(payload.emoji, user)
       return
