@@ -117,10 +117,10 @@ async def s3b(ctx):
   if str(ctx.message.author.id) != "314394344465498122":
     return
   await blListRefresh()
-  for dict in s3bEmbeds:
+  for dicto in s3bEmbeds:
     embedVar = discord.Embed(title="S3B", description="",color=000000)
-    for key in dict:
-      embedVar.add_field(name=key, value=dict[key], inline=False)
+    for key in dicto:
+      embedVar.add_field(name=key, value=dicto[key], inline=False)
     await ctx.send(embed=embedVar)
 
 ######################################################################################
@@ -262,7 +262,7 @@ async def on_raw_reaction_add(payload):
     page = s3bEmbeds[currentPage]
     embedVar = discord.Embed(title="S3B", description="",color=000000)
     for key in page:
-      embedVar.add_field(name=key, value=dict[key], inline=False)
+      embedVar.add_field(name=key, value=dicto[key], inline=False)
     await message.edit(embed=embedVar)
 
   if str(payload.emoji) == "⬅️":
@@ -275,7 +275,7 @@ async def on_raw_reaction_add(payload):
     page = s3bEmbeds[currentPage]
     embedVar = discord.Embed(title="S3B", description="",color=000000)
     for key in page:
-      embedVar.add_field(name=key, value=dict[key], inline=False)
+      embedVar.add_field(name=key, value=dicto[key], inline=False)
     await message.edit(embed=embedVar)
 
 
