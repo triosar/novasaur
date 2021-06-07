@@ -828,6 +828,7 @@ async def about(ctx):
 async def credits(ctx):
   embedVar = discord.Embed(title="Credits <:triodoge:784565546036232192>", description="",color=000000)
   embedVar.add_field(name="Triosar", value="- Most of the code used in this bot, not including modules\n- Maintaining and development of the bot", inline=False)
+  embedVar.add_field(name="Oveckin890", value="- Github contributor - minor commands.", inline=False)
   embedVar.add_field(name="P3tray", value="- Developed Lithium ingame admin, which shares information with Novasaur on trellobans.\n- Helped develop past Novasaur functions.", inline=False)
   embedVar.add_field(name="RandomArsenalAcc", value="- Helped with testing.", inline=False)
   embedVar.add_field(name="JMKDev", value="- Developed the ro.py module, which is used to connect this bot to Roblox.", inline=False)
