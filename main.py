@@ -263,6 +263,8 @@ async def on_raw_reaction_add(payload):
       message = await channel.fetch_message(844991560194064404)
       page = s3bEmbeds[currentPage]
       embedVar = discord.Embed(title="S3B", description="",color=000000)
+      foot = "Page "+str(currentPage+1)+"/"+str(len(s3bEmbeds))
+      embedVar.set_footer(text=foot)
       for key in page:
         embedVar.add_field(name=key, value=page[key], inline=False)
       await message.edit(embed=embedVar)
@@ -281,6 +283,8 @@ async def on_raw_reaction_add(payload):
 
       page = s3bEmbeds[currentPage]
       embedVar = discord.Embed(title="S3B", description="",color=000000)
+      foot = "Page "+str(currentPage+1)+"/"+str(len(s3bEmbeds))
+      embedVar.set_footer(text=foot)
       for key in page:
         embedVar.add_field(name=key, value=page[key], inline=False)
       await message.edit(embed=embedVar)
