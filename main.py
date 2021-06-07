@@ -1,3 +1,4 @@
+
 # Novasaur main file. - infinitypupper
 
 # Import modules
@@ -25,8 +26,8 @@ import traceback
 intents = discord.Intents().all()
 bot = commands.Bot(command_prefix='>',intents=intents)
 
-logging.basicConfig(filename='test.log', format='%(filename)s: %(message)s',
-    level=logging.ERROR)
+# logging.basicConfig(filename='test.log', format='%(filename)s: %(message)s',
+#     level=logging.ERROR)
 
 
 s1bEmbeds = []
@@ -35,13 +36,17 @@ s3bEmbeds = []
 # these store embeds
 
 async def blListRefresh():
-  global s1bEmbeds
-  global s2bEmbeds
-  global s3bEmbeds
 
   s1b = []
   s2b = []
   s3b = []
+
+  global s1bEmbeds 
+  s1bEmbeds = []
+  global s2bEmbeds
+  s2bEmbeds = []
+  global s3bEmbeds
+  s3bEmbeds = []
 
   TRELLO_APP_KEY = os.getenv('TRELLO_APP_KEY')
   TOKEN = os.getenv('TOKEN')
@@ -63,16 +68,17 @@ async def blListRefresh():
     if str(cardStage) == "3":
       s3b.append(cardName)
 
-
     
   RS = os.getenv('ROBLOSECURITY')
   roblox = Client(RS)
 
   counter = 1
+  footCount = 1
 
-  embedVar = discord.Embed(title="S1B", description="",color=000000)
+  embedVar = discord.Embed(title="S3B", description="",color=000000)
+  embedVar.add_field(name="test", value="test", inline=False)
 
-  for x in s1b:
+  for x in s3b:
     cardNameSplit = x.split(":")
 
     userID = cardNameSplit[0]
@@ -83,22 +89,31 @@ async def blListRefresh():
     currentName = user.name
 
     embedVar.add_field(name=currentName, value=reason, inline=False)
-
+    counter = counter + 1
+    print(counter)
     if counter == 24:
-      footCount = footCount + 1
+      print("new page moment")
       embedVar.set_footer(text = str(footCount))
-      s1bEmbeds.append(embedVar)
-      embedVar.fields = []
+      print(embedVar.fields)
+      toADD = embedVar
+      s3bEmbeds.append(toADD)
+      footCount = footCount + 1
+      await bot.get_channel(841015343749005392).send(embed=embedVar)
+      embedVar.clear_fields()
       counter = 1
-  s1bEmbeds.append(embedVar)
-  embedVar.fields = []
-
-  await bot.get_channel(841015343749005392).send("Blacklist Refresh for S1B done.")
+  print("final",embedVar.fields)
+  s3bEmbeds.append(embedVar)
+  #embedVar.clear_fields()
+  print(s3bEmbeds)
+  await bot.get_channel(841015343749005392).send(embed=embedVar)
+  await bot.get_channel(841015343749005392).send("Blacklist Refresh for S3B done.")
 
 @bot.command()
-async def s1b(ctx):
-  await blListRefresh
-  for x in s1bEmbeds:
+async def s3b(ctx):
+  await blListRefresh()
+  for x in s3bEmbeds:
+    print("pee",x)
+    await ctx.send(str(x.fields))
     await ctx.send(embed=x)
 
 
@@ -194,15 +209,15 @@ async def on_member_join(member):
 
 
 
-@bot.event
-async def on_command_error(ctx,error):
-  logging.error(error)
+# @bot.event
+# async def on_command_error(ctx,error):
+#   logging.error(error)
 
 
-@bot.event
-async def on_error(event, *args, **kwargs):
-    message = args[0] #Gets the message object
-    logging.error(traceback.format_exc()) #logs the error
+# @bot.event
+# async def on_error(event, *args, **kwargs):
+#     message = args[0] #Gets the message object
+#     logging.error(traceback.format_exc()) #logs the error
 
 def adminLog(userPing,fullmessage,comtype,server,channel):
     embedVar = discord.Embed(title="Admin Command Ran", description="",color=000000)
