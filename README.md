@@ -4,6 +4,8 @@ Keep in mind my code is **very** messy, but I'll look at improving tidiness and 
 
 Novasaur uses Python, and makes use of the discord.py library to communicate with Discord from a Python script.
 
+The only branch used at the moment is the `master` branch. I may make use of release functionality at a later time, but for now it's not paticularly worth the fuss.
+
 It is maintained by Triosar.
 # Features
 - Extremely basic filter.
