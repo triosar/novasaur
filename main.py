@@ -253,7 +253,7 @@ async def on_raw_reaction_add(payload):
   print(payload.emoji)
   currentPage = int(db["s3p"]) # get current page
 
-  if payload.emoji == "➡️":
+  if str(payload.emoji) == "➡️":
     print("right")
     currentPage = currentPage + 1
     db["s3p"] = int(currentPage)
@@ -267,7 +267,7 @@ async def on_raw_reaction_add(payload):
       embedVar.add_field(name=key, value=dict[key], inline=False)
     await message.edit(embed=embedVar)
 
-  if payload.emoji == "⬅️":
+  if str(payload.emoji) == "⬅️":
     print("left")
     currentPage = currentPage - 1
     db["s3p"] = int(currentPage)
