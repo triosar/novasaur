@@ -118,7 +118,6 @@ async def s3b(ctx):
     for key in dict:
       embedVar.add_field(name=key, value=dict[key], inline=False)
     await ctx.send(embed=embedVar)
-  await ctx.send(embed=x)
 
 ######################################################################################
 
