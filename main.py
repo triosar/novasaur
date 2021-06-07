@@ -1,6 +1,5 @@
-
+#owo
 # Novasaur main file. - infinitypupper
-
 # Import modules
 import os
 
