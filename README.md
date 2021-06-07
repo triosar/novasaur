@@ -7,6 +7,8 @@ Novasaur uses Python, and makes use of the discord.py library to communicate wit
 The only branch used at the moment is the `master` branch. I may make use of release functionality at a later time, but for now it's not paticularly worth the fuss.
 
 It is maintained by Triosar.
+
+***Note: when viewing the `main.py` file, there will be naughty words in the filtered words list!***
 # Features
 - Extremely basic filter.
 - Blacklist system, integrated with a private Trello board.
