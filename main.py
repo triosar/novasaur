@@ -104,7 +104,7 @@ async def blListRefresh():
 
       counter = 1
 
-  if on24:
+  if not on24:
     s3bEmbeds.append(newPage)
   #embedVar.clear_fields()
 
