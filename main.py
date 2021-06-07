@@ -256,7 +256,7 @@ async def on_raw_reaction_add(payload):
     currentPage = currentPage + 1
     db["s3p"] = int(currentPage)
     channel = bot.get_channel(844991540636286976)
-    message = channel.fetch_message(844991540636286976)
+    message = channel.fetch_message(844991560194064404)
 
     page = s3bEmbeds[currentPage]
     embedVar = discord.Embed(title="S3B", description="",color=000000)
@@ -268,7 +268,7 @@ async def on_raw_reaction_add(payload):
     currentPage = currentPage - 1
     db["s3p"] = int(currentPage)
     channel = bot.get_channel(844991540636286976)
-    message = channel.fetch_message(844991540636286976)
+    message = channel.fetch_message(844991560194064404)
 
     page = s3bEmbeds[currentPage]
     embedVar = discord.Embed(title="S3B", description="",color=000000)
