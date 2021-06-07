@@ -112,6 +112,8 @@ async def blListRefresh():
 
 @bot.command()
 async def s3b(ctx):
+  if str(ctx.message.author.id) != "314394344465498122":
+    return
   await blListRefresh()
   for dict in s3bEmbeds:
     embedVar = discord.Embed(title="S3B", description="",color=000000)
@@ -244,23 +246,9 @@ def slurCheck(phrase):
 async def on_raw_reaction_add(payload):
   if payload.channel_id != 844991540636286976:
     return
-  guild = await bot.fetch_guild(payload.guild_id)
-  member = await guild.fetch_member(payload.user_id)
-  member = str(member)
-
-  embedVar1 = discord.Embed(title="Stage 1 Blacklist",color=000000)
-  embedVar1.add_field(name="Triosar", value=("Being poopy"), inline=False)
-  embedVar1.set_footer(text="Page 1 of 2")
-
-  embedVar2 = discord.Embed(title="Stage 1 Blacklist",color=000000)
-  embedVar2.add_field(name="Triosar", value=("Being poopy"), inline=False)
-  embedVar2.set_footer(text="Page 1 of 2")
-
-  channel = bot.get_channel(payload.channel_id)
-  message = await channel.fetch_message(844991560194064404)
-  print(message)
+  if payload.message_id != 844991560194064404:
+    return
   
-  await message.edit(content="moment")
   
 
 @bot.event
@@ -1445,9 +1433,8 @@ async def badfriends(ctx,args):
 async def poc(ctx,*args):
   if str(ctx.author.id) != "314394344465498122":
     return
-  embedVar = discord.Embed(title="Stage 1 Blacklist",color=000000)
+  embedVar = discord.Embed(title="Stage 3 Blacklist",color=000000)
   embedVar.add_field(name="Triosar", value=("Being poopy"), inline=False)
-  embedVar.set_footer(text="Page 1 of 2")
   sent = await ctx.send(embed=embedVar)
   await sent.add_reaction("⬅️")
   await sent.add_reaction("➡️")
