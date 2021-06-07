@@ -256,40 +256,49 @@ async def on_raw_reaction_add(payload):
 
   if str(payload.emoji) == "➡️":
     print("right")
-    try:
-      currentPage = currentPage + 1
-      db["s3p"] = int(currentPage)
-      channel = bot.get_channel(844991540636286976)
-      message = await channel.fetch_message(844991560194064404)
-      page = s3bEmbeds[currentPage]
-      embedVar = discord.Embed(title="S3B", description="",color=000000)
-      foot = "Page "+str(currentPage+1)+"/"+str(len(s3bEmbeds))
-      embedVar.set_footer(text=foot)
-      for key in page:
-        embedVar.add_field(name=key, value=page[key], inline=False)
-      await message.edit(embed=embedVar)
-    except:
-      print("out of range moment")
+    noPage = len(s3bEmbeds)
+
+    if noPage == int(currentPage):
+      user = bot.get_user(payload.user_id)
+      await message.remove_reaction(payload.emoji, user)
+      return
+
+    currentPage = currentPage + 1
+    db["s3p"] = int(currentPage)
+    channel = bot.get_channel(844991540636286976)
+    message = await channel.fetch_message(844991560194064404)
+    page = s3bEmbeds[currentPage]
+    embedVar = discord.Embed(title="S3B", description="",color=000000)
+    foot = "Page "+str(currentPage+1)+"/"+str(len(s3bEmbeds))
+    embedVar.set_footer(text=foot)
+    for key in page:
+      embedVar.add_field(name=key, value=page[key], inline=False)
+    await message.edit(embed=embedVar)
     user = bot.get_user(payload.user_id)
     await message.remove_reaction(payload.emoji, user)
 
   if str(payload.emoji) == "⬅️":
     print("left")
-    try:
-      currentPage = currentPage - 1
-      db["s3p"] = int(currentPage)
-      channel = bot.get_channel(844991540636286976)
-      message = await channel.fetch_message(844991560194064404)
+    noPage = len(s3bEmbeds)
 
-      page = s3bEmbeds[currentPage]
-      embedVar = discord.Embed(title="S3B", description="",color=000000)
-      foot = "Page "+str(currentPage+1)+"/"+str(len(s3bEmbeds))
-      embedVar.set_footer(text=foot)
-      for key in page:
-        embedVar.add_field(name=key, value=page[key], inline=False)
-      await message.edit(embed=embedVar)
-    except:
-      print("out of range moment")
+    if noPage == int(currentPage):
+      user = bot.get_user(payload.user_id)
+      await message.remove_reaction(payload.emoji, user)
+      return
+
+
+    currentPage = currentPage - 1
+    db["s3p"] = int(currentPage)
+    channel = bot.get_channel(844991540636286976)
+    message = await channel.fetch_message(844991560194064404)
+
+    page = s3bEmbeds[currentPage]
+    embedVar = discord.Embed(title="S3B", description="",color=000000)
+    foot = "Page "+str(currentPage+1)+"/"+str(len(s3bEmbeds))
+    embedVar.set_footer(text=foot)
+    for key in page:
+      embedVar.add_field(name=key, value=page[key], inline=False)
+    await message.edit(embed=embedVar)
     user = bot.get_user(payload.user_id)
     await message.remove_reaction(payload.emoji, user)
 
