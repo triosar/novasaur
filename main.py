@@ -2,6 +2,7 @@
 # Novasaur main file. - infinitypupper
 # Import modules
 import os
+from ro_py import users
 
 from ro_py.users import User
 import discord
@@ -264,6 +265,8 @@ async def on_raw_reaction_add(payload):
     for key in page:
       embedVar.add_field(name=key, value=page[key], inline=False)
     await message.edit(embed=embedVar)
+    user = bot.get_user(payload.user_id)
+    await message.remove_reaction(payload.emoji, user)
 
   if str(payload.emoji) == "⬅️":
     print("left")
@@ -277,6 +280,8 @@ async def on_raw_reaction_add(payload):
     for key in page:
       embedVar.add_field(name=key, value=page[key], inline=False)
     await message.edit(embed=embedVar)
+    user = bot.get_user(payload.user_id)
+    await message.remove_reaction(payload.emoji, user)
 
 
 
