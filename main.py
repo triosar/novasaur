@@ -206,6 +206,7 @@ def adminLog(userPing,fullmessage,comtype,server,channel):
     embedVar.add_field(name="Full Command", value=fullmessage, inline=False)
     embedVar.add_field(name="Server", value=server, inline=False)
     embedVar.add_field(name="Channel", value=channel, inline=False)
+    embedVar.set_footer(text="Command log | Novasaur")
     bot.loop.create_task(bot.get_channel(790939607268851762).send(embed=embedVar))
 
 # checks if a phrase is in the slur list, and which one
@@ -221,13 +222,14 @@ def slurCheck(phrase):
 async def on_member_join(member):
 
   if str(member.guild.id) == "832614351265333279":
-    await member.send('generic welcome message - saurland')
+    await member.send('Generic welcome message - Saurland')
 
     channel = bot.get_channel(840554012470542376)
     embedVar = discord.Embed(title="New Join Request", description="",color=000000)
     
     embedVar.add_field(name="Name", value=member.display_name, inline=False)
-    embedVar.add_field(name="Ping", value="<@"+str(member.id)+">", inline=False)      
+    embedVar.add_field(name="Ping", value="<@"+str(member.id)+">", inline=False)  
+    embedVar.set_footer(text="New join request | Novasaur")    
     toReact = await channel.send(embed=embedVar)
     
     await toReact.add_reaction('👍')
@@ -310,9 +312,11 @@ async def on_raw_reaction_add(payload):
 @bot.event
 async def on_ready():
     print(f'{bot.user.name} has connected to Discord!')
-    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="you type! | Prefix = '>'!"))
+    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="you type! | Prefix is '>'!"))
     channel = bot.get_channel(832614393279283211)
-    await channel.send("`Bot connected to Discord.`")
+    embedVar2 = discord.Embed(title="Bot connected to discord",description=f'Bot successfully connected to Discord at {time.asctime()}.',color=000000)
+    embedVar2.set_footer(text="Hello world | Novasaur")
+    await channel.send(embed=embedVar2)
 
     for server in bot.guilds:
       serverlist.append(str(server))
@@ -384,6 +388,7 @@ async def on_message(message):
         embedVar.add_field(name="Username", value="<@"+str(message.author.id)+">", inline=False)
         embedVar.add_field(name="Action Type", value=dynoType, inline=False)
         embedVar.add_field(name="Full Message", value=str(message.content), inline=False)
+        embedVar.set_footer(text="NOU Dyno Command log | Novasaur")
         channel = bot.get_channel(796891566341226506)
         await channel.send(embed=embedVar)
 
@@ -420,6 +425,7 @@ async def on_message(message):
     embedVar.add_field(name="Channel:",value = channelname,inline=False)
     embedVar.add_field(name="Trigger:",value = phrase,inline=False)
     embedVar.add_field(name="Entire Message:",value = total,inline=False)
+    embedVar.set_footer(text="Autofilter | Novasaur")
     if botAdminSlur:
         embedVar.set_footer(text="BotAdmin violation - the violating message was not deleted.")
       
@@ -433,8 +439,9 @@ async def on_message(message):
     embedVar.add_field(name="Channel:",value = channelname,inline=False)
     embedVar.add_field(name="Trigger:",value = phrase,inline=False)
     embedVar.add_field(name="Entire Message:",value = total,inline=False)
+    embedVar.set_footer(text="Autofilter | Novasaur")
     if botAdminSlur:
-        embedVar.set_footer(text="BotAdmin violation - the violating message was not deleted.")
+        embedVar.set_footer(text="BotAdmin violation - the violating message was not deleted. | Novasaur")
     await channel.send(embed=embedVar)
     channel = bot.get_channel(772748922371440660)
     await channel.send(embed=embedVar)
@@ -507,6 +514,7 @@ async def servers(ctx):
   for line in serverlist:
     embedVar.add_field(name="Server #"+str(counter), value=(str(line)), inline=False)
     counter = counter + 1
+  embedVar.set_footer(text="Server list | Novasaur")
   await ctx.send(embed=embedVar)
   await ctx.message.delete()
 
@@ -527,6 +535,7 @@ async def admins(ctx):
   for line in botadmins:
     embedVar.add_field(name="Admin #"+str(counter), value=("<@"+str(line)+">"), inline=False)
     counter = counter + 1
+  embedVar.set_footer(text="Bot Admins list | Novasaur")
   await ctx.send(embed=embedVar)
   await ctx.message.delete()
 
@@ -880,6 +889,7 @@ async def cmds(ctx):
 async def about(ctx):
   embedVar = discord.Embed(title="<:triodoge:784565546036232192>", description="",color=000000)
   embedVar.add_field(name="About", value="Novasaur is a small auxiliary bot which works alongside <@819310933197324318> and the Lithium in-game admin to complete management and moderation tasks.\nIn the past, it performed a wider range of jobs, but many of these tasks have since been transferred to <@819310933197324318>.\nMore features may be given to this bot, but this is not considered a priority.\nContact <@314394344465498122> for bugs or suggestions.", inline=False)
+  embedVar.set_footer(text="About | Novasaur")
   await ctx.send(embed=embedVar)
 
 @bot.command()
@@ -891,6 +901,7 @@ async def credits(ctx):
   embedVar.add_field(name="RandomArsenalAcc", value="- Helped with testing.", inline=False)
   embedVar.add_field(name="JMKDev", value="- Developed the ro.py module, which is used to connect this bot to Roblox.", inline=False)
   embedVar.add_field(name="Other Credits", value="This bot uses many other modules to simplify my life, such as:\n- discord.py\n- A python module to connect to Trello", inline=False)
+  embedVar.set_footer(text="Credits | Novasaur")
   await ctx.send(embed=embedVar)
 
 @bot.command()
@@ -1510,13 +1521,20 @@ async def poc(ctx,*args):
 @bot.command()
 async def poll(ctx,*args):
   embed = discord.Embed(title=' '.join(args),description=f'Sent by: {ctx.message.author}',color=000000)  ## Added embed instead of message.
+  embed.set_footer(text="Poll | Novasaur")
   msg = await ctx.send(embed=embed)
   await msg.add_reaction("✅")
   await msg.add_reaction("❌") 
 
 @bot.command()
 async def floppa(ctx,*args):
-  await ctx.send('https://tenor.com/btFVt.gif')  ## Floppa command makes the bot more alive.
+  await ctx.send(random.choice([
+    "https://tenor.com/btvbY.gif",
+    "https://tenor.com/btFVt.gif",
+    "https://tenor.com/bthES.gif",
+    "https://tenor.com/bDsKF.gif",
+    "https://tenor.com/bC7yO.gif"
+  ]))
 
 @bot.command()
 async def granks(ctx,*args):
@@ -1581,6 +1599,7 @@ async def granks(ctx,*args):
     name = (x.name)
     val = (x.rank)
     embedVar.add_field(name=x.name, value=(x.rank), inline=False)
+  embedVar.set_footer(text="Group Ranks | Novasaur")    
   await ctx.send(embed=embedVar)
 
 @bot.command()
