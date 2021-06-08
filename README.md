@@ -15,6 +15,14 @@ It is maintained by Triosar.
 - Ability to universally gameban people from all Nova Incorporated games using the Lithium ingame Admin system.
 - The ability to fetch all group ranks/IDs from a Roblox group.
 
+# Features in development/planned
+- Blacklist pagination system. (In development)
+- Command to kick users in a given role, excluding users in another given role. (Planned)
+- NOU storage related commands. (Planned)
+- Modification of `>trelloban` to fetch Roblox IDs. (Planned)
+- Transition of blacklist storage to another database. (Planned)
+
+
 # Contributing
 - Your only concern when contributing should be the `main.py` file. All other files do not make up the "core bot", and are used for various reasons, testing or otherwise.
 - Contributions are welcome. Its preferred that you focus minor commands/features, but Nova Incorporated developers are free to request changes pertaining to official development, with prior agreement on the features.
