@@ -1,9 +1,9 @@
 #owo
 # Novasaur main file. - infinitypupper
-# Import modules
+
+# Import like 4532534534543 modules
 import os
 from ro_py import users
-
 from ro_py.users import User
 import discord
 from dotenv import load_dotenv
@@ -26,19 +26,89 @@ import traceback
 intents = discord.Intents().all()
 bot = commands.Bot(command_prefix='>',intents=intents)
 
+# One of the bits for Discord channel logging. Currently off for development purposes.
 # logging.basicConfig(filename='test.log', format='%(filename)s: %(message)s',
 #     level=logging.ERROR)
 
-db["s3p"] = int(0)
 
+db["s3p"] = int(0) # current Stage 3 page
 
+# where blacklist pages are stored
 s1bEmbeds = []
 s2bEmbeds = []
 s3bEmbeds = []
-# these store embeds
 
-######################################################################################
 
+xmasTime = int(1640390400) # define christmas day as unix
+
+# Declare various lists for use.
+badwords = ['nigger','niggers','nibber','nigga','nibba','faggot','faget',' fag ','fagging','fagot','mussie','mossie',' cum','ejaculate','jerk  of','lezzo','lezbo','lezzer','lezer','lezza','leza','masturbat','molest','porn', ' rape ','rimjob','rimming','blowjob','sextoy','skank','slut','sperm','sodom','tranny','tranni','trany','trani',' wank',' wog ','retard','f@g','re3tard','cunt','c u m',' c u m','hentai','ahegao','cocaine','crackhead','whore','spunk']
+botadmins = ["315193131282726914","314394344465498122","626171285491154944","691770905835077643","340167800561860618","435457720855035914"]
+blacklist = [] # yeah idk what this is used for
+rps_choices = ["scissors!", "rock!", "paper!"]
+serverlist = [] # server names
+slist = [] #server objects
+
+# define time
+starttime = time.time()
+print(starttime)
+
+#load from .env
+load_dotenv()
+TOKEN = os.getenv('DISCORD_TOKEN')
+
+# function to delete a card from the trelloban list
+def clearUser(name):
+  TRELLO_APP_KEY = os.getenv('TRELLO_APP_KEY')
+  TOKEN = os.getenv('TOKEN')
+  listID = "6093ccae8f0a0a4e409fa1ce"
+  
+  trello = TrelloApi(TRELLO_APP_KEY, TOKEN)
+
+  cardList = trello.lists.get_card(listID)
+
+  for x in cardList:
+    splity = x["name"].split(":")[0] # i.e. the first split part of the card title
+    if str(splity) == str(name):
+      trello.cards.delete(x['id'])
+
+# poorly named, but this is the command that continually logs 
+async def checkQ():
+  while True:
+    await asyncio.sleep(1)
+    fileq = open("test.log","r")
+    for x in fileq:
+      toSend = "```py\n"+x+"```"
+      bot.loop.create_task((bot.get_channel(832614393279283211)).send(toSend))
+    fileq.close()
+    open('test.log', 'w').close()
+
+# returns any friends the provided user has who are also blacklisted
+async def checkFriends(username):
+  RS = os.getenv('ROBLOSECURITY')
+  roblox = Client(RS)
+
+  TRELLO_APP_KEY = os.getenv('TRELLO_APP_KEY')
+  TOKEN = os.getenv('TOKEN')
+  trello = TrelloApi(TRELLO_APP_KEY, TOKEN)
+  listIDBL = "6093ccae8f0a0a4e409fa1ce"
+
+  user = await roblox.get_user_by_username(username)
+  friendList = []
+  trelloBL = []
+  badList = []
+  crossover = []
+  for x in await user.get_friends():
+    friendList.append(str(x.id))
+  for x in trello.lists.get_card(listIDBL):
+    if str(x["name"].split(":")[1]) in ["1","2","3"]:
+      badList.append(str(x["name"].split(":")[0]))
+  for x in friendList:
+    if (x in badList):
+      crossover.append(x)
+  return crossover
+
+# refreshes the blacklist "pages" with any new additions/deletions/changes
 async def blListRefresh():
 
   s1b = []
@@ -113,90 +183,24 @@ async def blListRefresh():
 
   await bot.get_channel(841015343749005392).send("Blacklist Refresh for S3B done.")
 
-@bot.command()
-async def s3b(ctx):
-  if str(ctx.message.author.id) != "314394344465498122":
-    return
-  await blListRefresh()
-  for dicto in s3bEmbeds:
-    embedVar = discord.Embed(title="S3B", description="",color=000000)
-    for key in dicto:
-      embedVar.add_field(name=key, value=dicto[key], inline=False)
-    await ctx.send(embed=embedVar)
+# logging function for any kind of "admin" command
+def adminLog(userPing,fullmessage,comtype,server,channel):
+    embedVar = discord.Embed(title="Admin Command Ran", description="",color=000000)
+    embedVar.add_field(name="User", value=userPing, inline=False)
+    embedVar.add_field(name="Command Type", value=comtype, inline=False)
+    embedVar.add_field(name="Full Command", value=fullmessage, inline=False)
+    embedVar.add_field(name="Server", value=server, inline=False)
+    embedVar.add_field(name="Channel", value=channel, inline=False)
+    bot.loop.create_task(bot.get_channel(790939607268851762).send(embed=embedVar))
 
-######################################################################################
-
-
-def clearUser(name):
-  TRELLO_APP_KEY = os.getenv('TRELLO_APP_KEY')
-  TOKEN = os.getenv('TOKEN')
-  listID = "6093ccae8f0a0a4e409fa1ce"
-  
-  trello = TrelloApi(TRELLO_APP_KEY, TOKEN)
-
-  cardList = trello.lists.get_card(listID)
-
-  for x in cardList:
-    splity = x["name"].split(":")[0]
-    if str(splity) == str(name):
-      trello.cards.delete(x['id'])
-
-
-async def checkQ():
-  while True:
-    await asyncio.sleep(1)
-    fileq = open("test.log","r")
-    for x in fileq:
-      toSend = "```py\n"+x+"```"
-      bot.loop.create_task((bot.get_channel(832614393279283211)).send(toSend))
-    fileq.close()
-    open('test.log', 'w').close()
-
-async def checkFriends(username):
-  RS = os.getenv('ROBLOSECURITY')
-  roblox = Client(RS)
-
-  TRELLO_APP_KEY = os.getenv('TRELLO_APP_KEY')
-  TOKEN = os.getenv('TOKEN')
-  trello = TrelloApi(TRELLO_APP_KEY, TOKEN)
-  listIDBL = "6093ccae8f0a0a4e409fa1ce"
-
-  user = await roblox.get_user_by_username(username)
-  friendList = []
-  trelloBL = []
-  badList = []
-  crossover = []
-  for x in await user.get_friends():
-    friendList.append(str(x.id))
-  for x in trello.lists.get_card(listIDBL):
-    if str(x["name"].split(":")[1]) in ["1","2","3"]:
-      badList.append(str(x["name"].split(":")[0]))
-  for x in friendList:
-    if (x in badList):
-      crossover.append(x)
-  return crossover
-
-xmasTime = int(1640390400) # define christmas day as unix
-
-# Declare various lists for use.
-badwords = ['nigger','niggers','nibber','nigga','nibba','faggot','faget',' fag ','fagging','fagot','mussie','mossie',' cum','ejaculate','jerk  of','lezzo','lezbo','lezzer','lezer','lezza','leza','masturbat','molest','porn', ' rape ','rimjob','rimming','blowjob','sextoy','skank','slut','sperm','sodom','tranny','tranni','trany','trani',' wank',' wog ','retard','f@g','re3tard','cunt','c u m',' c u m','hentai','ahegao','cocaine','crackhead','whore','spunk']
-
-botadmins = ["315193131282726914","314394344465498122","626171285491154944","691770905835077643","340167800561860618","435457720855035914"]
-#botadmin order: reis, triosar, alex, killer,sxens, dyno
-blacklist = []
-#bl order: 
-rps_choices = ["scissors!", "rock!", "paper!"]
-
-serverlist = [] # server names
-slist = [] #server objects
-
-# define time
-starttime = time.time()
-print(starttime)
-
-#load from .env
-load_dotenv()
-TOKEN = os.getenv('DISCORD_TOKEN')
+# checks if a phrase is in the slur list, and which one
+def slurCheck(phrase):
+  wordstatus = False
+  msg = str((phrase)).lower()
+  for x in badwords:
+    if x in msg:
+      wordstatus = x
+  return wordstatus
 
 @bot.event
 async def on_member_join(member):
@@ -226,24 +230,6 @@ async def on_member_join(member):
 # async def on_error(event, *args, **kwargs):
 #     message = args[0] #Gets the message object
 #     logging.error(traceback.format_exc()) #logs the error
-
-def adminLog(userPing,fullmessage,comtype,server,channel):
-    embedVar = discord.Embed(title="Admin Command Ran", description="",color=000000)
-    embedVar.add_field(name="User", value=userPing, inline=False)
-    embedVar.add_field(name="Command Type", value=comtype, inline=False)
-    embedVar.add_field(name="Full Command", value=fullmessage, inline=False)
-    embedVar.add_field(name="Server", value=server, inline=False)
-    embedVar.add_field(name="Channel", value=channel, inline=False)
-    bot.loop.create_task(bot.get_channel(790939607268851762).send(embed=embedVar))
-
-# checks if a phrase is in the slur list, and which one
-def slurCheck(phrase):
-  wordstatus = False
-  msg = str((phrase)).lower()
-  for x in badwords:
-    if x in msg:
-      wordstatus = x
-  return wordstatus
 
 @bot.event
 async def on_raw_reaction_add(payload):
@@ -458,7 +444,16 @@ async def on_message(message):
   if str(message.author.id) not in blacklist:
     await bot.process_commands(message)
 
-
+@bot.command()
+async def s3b(ctx):
+  if str(ctx.message.author.id) != "314394344465498122":
+    return
+  await blListRefresh()
+  for dicto in s3bEmbeds:
+    embedVar = discord.Embed(title="S3B", description="",color=000000)
+    for key in dicto:
+      embedVar.add_field(name=key, value=dicto[key], inline=False)
+    await ctx.send(embed=embedVar)
 
 @bot.command()
 async def say(ctx,*args):
