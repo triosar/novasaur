@@ -38,3 +38,5 @@ if "amogus" in str(message.content).lower():
 
 # Credits
 A credits list is included in the code, as part of the `>credits` command.
+
+Novasaur © 2021 by Triosar is licensed under CC BY-NC 4.0
