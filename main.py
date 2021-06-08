@@ -1,4 +1,3 @@
-#owo
 # Novasaur main file. - infinitypupper
 
 # Import like 4532534534543 modules
