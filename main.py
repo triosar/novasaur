@@ -181,6 +181,21 @@ async def blListRefresh():
     s3bEmbeds.append(newPage)
   #embedVar.clear_fields()
 
+  print("refresh")
+  noPage = len(s3bEmbeds)
+  channel = bot.get_channel(844991540636286976)
+  message = await channel.fetch_message(844991560194064404)
+
+  currentPage = 0
+  db["s3p"] = 0
+  page = s3bEmbeds[currentPage]
+  embedVar = discord.Embed(title="S3B", description="",color=000000)
+  foot = "Page "+str(currentPage+1)+"/"+str(len(s3bEmbeds))
+  embedVar.set_footer(text=foot)
+  for key in page:
+    embedVar.add_field(name=key, value=page[key], inline=False)
+  await message.edit(embed=embedVar)
+
   await bot.get_channel(841015343749005392).send("Blacklist Refresh for S3B done.")
 
 # logging function for any kind of "admin" command
