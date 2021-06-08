@@ -47,5 +47,7 @@ if "amogus" in str(message.content).lower():
 # Credits
 A credits list is included in the code, as part of the `>credits` command.
 
-Novasaur © 2021 by Triosar is licensed under the MIT license.
-This applies solely to the code contained within this repository, and does not grant access to Novasaur's bot account or any associated databases/profiles/etc used in the operation of the Novasaur bot.
+Novasaur © 2021 by Triosar is licensed under the MIT license.  
+This applies solely to the code contained within this repository, and does not grant access to Novasaur's bot account or any associated databases/profiles/etc used in the operation of the Novasaur bot.  
+  
+Simply put, you may do as you wish with the code provided any derivatives of the code are also under the MIT license, provided that I am ackowledged as the original creator of these works, and that I hold no responsiblity for your use of the code.  
