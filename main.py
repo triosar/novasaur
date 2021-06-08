@@ -103,13 +103,14 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 async def on_member_join(member):
 
   if str(member.guild.id) == "832614351265333279":
-    await member.send('generic welcome message - saurland')
+    await member.send('Generic welcome message - Saurland')
 
     channel = bot.get_channel(840554012470542376)
     embedVar = discord.Embed(title="New Join Request", description="",color=000000)
     
     embedVar.add_field(name="Name", value=member.display_name, inline=False)
     embedVar.add_field(name="Ping", value="<@"+str(member.id)+">", inline=False)      
+    embedVar.set_footer(text="New join request | Novasaur")
     toReact = await channel.send(embed=embedVar)
     
     await toReact.add_reaction('👍')
@@ -135,6 +136,7 @@ def adminLog(userPing,fullmessage,comtype,server,channel):
     embedVar.add_field(name="Full Command", value=fullmessage, inline=False)
     embedVar.add_field(name="Server", value=server, inline=False)
     embedVar.add_field(name="Channel", value=channel, inline=False)
+    embedVar.set_footer(text="Command log | Novasaur")
     bot.loop.create_task(bot.get_channel(790939607268851762).send(embed=embedVar))
 
 # checks if a phrase is in the slur list, and which one
@@ -156,11 +158,11 @@ async def on_raw_reaction_add(payload):
 
   embedVar1 = discord.Embed(title="Stage 1 Blacklist",color=000000)
   embedVar1.add_field(name="Triosar", value=("Being poopy"), inline=False)
-  embedVar1.set_footer(text="Page 1 of 2")
+  embedVar1.set_footer(text="Page 1 of 2 | Novasaur")
 
   embedVar2 = discord.Embed(title="Stage 1 Blacklist",color=000000)
   embedVar2.add_field(name="Triosar", value=("Being poopy"), inline=False)
-  embedVar2.set_footer(text="Page 1 of 2")
+  embedVar2.set_footer(text="Page 1 of 2 | Novasaur")
 
   channel = bot.get_channel(payload.channel_id)
   message = await channel.fetch_message(844991560194064404)
@@ -172,9 +174,11 @@ async def on_raw_reaction_add(payload):
 @bot.event
 async def on_ready():
     print(f'{bot.user.name} has connected to Discord!')
-    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="you type! | Prefix = '>'!"))
+    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="you type! | Prefix is '>'"))
     channel = bot.get_channel(832614393279283211)
-    await channel.send("`Bot connected to Discord.`")
+    embedVar2 = discord.Embed(title="Bot connected to discord",description=f'Bot successfully connected to discord at {time.asctime()}.',color=000000)
+    embedVar2.set_footer(text="Hello world | Novasaur")
+    await channel.send(embed=embedVar2)
 
     for server in bot.guilds:
       serverlist.append(str(server))
@@ -244,6 +248,7 @@ async def on_message(message):
         embedVar.add_field(name="Username", value="<@"+str(message.author.id)+">", inline=False)
         embedVar.add_field(name="Action Type", value=dynoType, inline=False)
         embedVar.add_field(name="Full Message", value=str(message.content), inline=False)
+        embedVar.set_footer(text="Dyno's Command log | Novasaur")
         channel = bot.get_channel(796891566341226506)
         await channel.send(embed=embedVar)
 
@@ -256,6 +261,7 @@ async def on_message(message):
 
     embedVar.add_field(name="Username:", value=(user), inline=False)
     embedVar.add_field(name="Message:",value = message.content,inline=False)
+    embedVar.set_footer(text="Direct Message | Novasaur")
       
     await channel.send(embed=embedVar)
 
@@ -280,10 +286,11 @@ async def on_message(message):
     embedVar.add_field(name="Channel:",value = channelname,inline=False)
     embedVar.add_field(name="Trigger:",value = phrase,inline=False)
     embedVar.add_field(name="Entire Message:",value = total,inline=False)
+    embedVar.set_footer(text="Autofilter | Novasaur")
     if botAdminSlur:
-        embedVar.set_footer(text="BotAdmin violation - the violating message was not deleted.")
+        embedVar.set_footer(text="BotAdmin violation - the violating message was not deleted. | Novasaur")
       
-    response = "Please don't use words like **"+phrase+"**!"
+    response = "Please don't use words like **"+phrase+"**."
     channel = bot.get_channel(834397212481028136)
       #nou server
 
@@ -293,8 +300,9 @@ async def on_message(message):
     embedVar.add_field(name="Channel:",value = channelname,inline=False)
     embedVar.add_field(name="Trigger:",value = phrase,inline=False)
     embedVar.add_field(name="Entire Message:",value = total,inline=False)
+    embedVar.set_footer(text="Autofilter | Novasaur")
     if botAdminSlur:
-        embedVar.set_footer(text="BotAdmin violation - the violating message was not deleted.")
+        embedVar.set_footer(text="BotAdmin violation - the violating message was not deleted. | Novasaur")
     await channel.send(embed=embedVar)
     channel = bot.get_channel(772748922371440660)
     await channel.send(embed=embedVar)
@@ -309,11 +317,11 @@ async def on_message(message):
     finally:
       await message.add_reaction("😡")
       if not botAdminSlur:
-        await message.delete()
+        await message.delete() 
     return
-  if str(message.content).lower() == "good bot":
+  if str(message.content).lower() == "good bot" or str(message.content).lower() == "good bot.":
     await message.channel.send(":D")
-  if str(message.content).lower() == "woof":
+  if str(message.content).lower() == "woof" or str(message.content).lower() == "woof.":
     await message.channel.send("woof")
 
   if str(message.author.id) not in blacklist:
@@ -358,6 +366,7 @@ async def servers(ctx):
   for line in serverlist:
     embedVar.add_field(name="Server #"+str(counter), value=(str(line)), inline=False)
     counter = counter + 1
+  embedVar.set_footer(text="Server list | Novasaur")
   await ctx.send(embed=embedVar)
   await ctx.message.delete()
 
@@ -368,6 +377,7 @@ async def botbl(ctx):
   for line in blacklist:
     embedVar.add_field(name="User #"+str(counter), value=("<@"+str(line)+">"), inline=False)
     counter = counter + 1
+  embedVar.set_footer(text="Blacklisted users list | Novasaur")
   await ctx.send(embed=embedVar)
   await ctx.message.delete()
 
@@ -378,6 +388,7 @@ async def admins(ctx):
   for line in botadmins:
     embedVar.add_field(name="Admin #"+str(counter), value=("<@"+str(line)+">"), inline=False)
     counter = counter + 1
+  embedVar.set_footer(text="Bot admins list | Novasaur")
   await ctx.send(embed=embedVar)
   await ctx.message.delete()
 
@@ -394,6 +405,7 @@ async def oldblsetup(ctx):
     contentSplit = content.split(":")
     if contentSplit[0] == "1":
       embedVar.add_field(name=x, value=("*"+contentSplit[1]+"*"), inline=False)
+  embedVar.set_footer(text="Stage 1 blacklist list | Novasaur")
   await ctx.send(embed=embedVar)
 
   embedVar = discord.Embed(title="Stage 2 Blacklist",color=000000) 
@@ -402,6 +414,7 @@ async def oldblsetup(ctx):
     contentSplit = content.split(":")
     if contentSplit[0] == "2":
       embedVar.add_field(name=x, value=("*"+contentSplit[1]+"*"), inline=False)
+  embedVar.set_footer(text="Stage 2 blacklist list | Novasaur")
   await ctx.send(embed=embedVar)
 
   embedVar = discord.Embed(title="Stage 3 Blacklist",color=000000) 
@@ -410,6 +423,7 @@ async def oldblsetup(ctx):
     contentSplit = content.split(":")
     if contentSplit[0] == "3":
       embedVar.add_field(name=x, value=("*"+contentSplit[1]+"*"), inline=False)
+  embedVar.set_footer(text="Stage 3 blacklist list | Novasaur")
   await ctx.send(embed=embedVar)
   await ctx.message.delete()
 
@@ -481,6 +495,7 @@ async def oldbl(ctx, *args):
     contentSplit = content.split(":")
     if contentSplit[0] == "1":
       embedVar.add_field(name=x, value=("*"+contentSplit[1]+"*"), inline=False)
+  embedVar.set_footer(text="Stage 1 blacklist | Novasaur")
   await msgs1b.edit(embed=embedVar)
 
 
@@ -490,6 +505,7 @@ async def oldbl(ctx, *args):
     contentSplit = content.split(":")
     if contentSplit[0] == "2":
       embedVar.add_field(name=x, value=("*"+contentSplit[1]+"*"), inline=False)
+  embedVar.set_footer(text="Stage 2 blacklist | Novasaur")
   await msgs2b.edit(embed=embedVar)
 
   embedVar = discord.Embed(title="Stage 3 Blacklist",color=000000) 
@@ -498,6 +514,7 @@ async def oldbl(ctx, *args):
     contentSplit = content.split(":")
     if contentSplit[0] == "3":
       embedVar.add_field(name=x, value=("*"+contentSplit[1]+"*"), inline=False)
+  embedVar.set_footer(text="Stage 3 blacklist | Novasaur")
   await msgs3b.edit(embed=embedVar)
   await ctx.message.delete()
 
@@ -521,6 +538,7 @@ async def oldblrefresh(ctx,*args):
     contentSplit = content.split(":")
     if contentSplit[0] == "1":
       embedVar.add_field(name=x, value=("*"+contentSplit[1]+"*"), inline=False)
+  embedVar.set_footer(text="Stage 1 blacklist | Novasaur")
   await msgs1b.edit(embed=embedVar)
 
   embedVar = discord.Embed(title="Stage 2 Blacklist",color=000000) 
@@ -529,6 +547,7 @@ async def oldblrefresh(ctx,*args):
     contentSplit = content.split(":")
     if contentSplit[0] == "2":
       embedVar.add_field(name=x, value=("*"+contentSplit[1]+"*"), inline=False)
+  embedVar.set_footer(text="Stage 2 blacklist | Novasaur")
   await msgs2b.edit(embed=embedVar)
 
   embedVar = discord.Embed(title="Stage 3 Blacklist",color=000000) 
@@ -537,6 +556,7 @@ async def oldblrefresh(ctx,*args):
     contentSplit = content.split(":")
     if contentSplit[0] == "3":
       embedVar.add_field(name=x, value=("*"+contentSplit[1]+"*"), inline=False)
+  embedVar.set_footer(text="Stage 3 blacklist | Novasaur")
   await msgs3b.edit(embed=embedVar)
   await ctx.message.delete()
   adminLog("<@"+str(ctx.message.author.id)+">",str(ctx.message.content),"Blacklist Refresh",ctx.message.guild,ctx.message.channel)
@@ -684,12 +704,14 @@ async def oldblsearch(ctx,args):
       embedVar.add_field(name="Stage:", value=stage, inline=False)
       embedVar.add_field(name="Reason:", value=reason, inline=False)
       embedVar.add_field(name="Trello Banned?:", value=str(trelloBanned), inline=False)
+      embedVar.set_footer(text="Trello blacklists | Novasaur")
       await ctx.send(embed=embedVar)
   elif trelloBanned == "Yes":
     embedVar = discord.Embed(title=username, description="*This command is deprecated.*\n*It may not show information that is totally up-to-date or correct.*\n*It will be replaced in the future.*",color=000000)
     embedVar.add_field(name="Stage:", value=stage, inline=False)
     embedVar.add_field(name="Reason:", value=reason, inline=False)
     embedVar.add_field(name="Trello Banned?:", value=str(trelloBanned), inline=False)
+    embedVar.set_footer(text="Trello blacklists | Novasaur")
     await ctx.send(embed=embedVar)
   else:
     await ctx.send("That user is not BL-ed or trello-banned.")
@@ -706,10 +728,12 @@ async def cmds(ctx):
   embedVar.add_field(name=">floppa", value="Shows floppa gif.", inline=False) ## Floppa Added to the list.
   embedVar.add_field(name=">servers", value="Lists all servers the bot is in.", inline=False)
   embedVar.add_field(name=">uptime", value="Shows how long the bot has been connected to Discord.", inline=False)
+  embedVar.set_footer(text="Help Page 1 | Novasaur")
   await ctx.send(embed=embedVar)
 
   embedVar = discord.Embed(title="Restricted Commands (NOU-related)", description="These are commands that can only be run in the NOU Guild.",color=000000)
   embedVar.add_field(name=">nousearch <username>", value="Currently a blsearch clone.\nIn the future, will show NOU records on an individual as well as any blacklist information.", inline=False)
+  embedVar.set_footer(text="Help Page 2 | Novasaur")
   await ctx.send(embed=embedVar)
 
   embedVar = discord.Embed(title="Restricted Commands (NS/management-related)", description="Some commands are not shown here as they are legacy commands kept as a backup.",color=000000)
@@ -724,12 +748,14 @@ async def cmds(ctx):
   embedVar.add_field(name=">blsetup", value="[Trio] Setups the blacklist posts.\nNeeds internal configuration after the command is run.", inline=False)  
   embedVar.add_field(name=">blrefresh", value="[Trio] Refreshes the blacklist.\nMust be run in #rt-blacklist to function correctly.\nPrivate to prevent abuse and ratelimiting.", inline=False)
   embedVar.add_field(name=">eval <code>", value="[Trio] Executes the provided python code.", inline=False)
+  embedVar.set_footer(text="Help Page 3 | Novasaur")
   await ctx.send(embed=embedVar)
 
 @bot.command()
 async def about(ctx):
   embedVar = discord.Embed(title="<:triodoge:784565546036232192>", description="",color=000000)
   embedVar.add_field(name="About", value="Novasaur is a small auxiliary bot which works alongside <@819310933197324318> and the Lithium in-game admin to complete management and moderation tasks.\nIn the past, it performed a wider range of jobs, but many of these tasks have since been transferred to <@819310933197324318>.\nMore features may be given to this bot, but this is not considered a priority.\nContact <@314394344465498122> for bugs or suggestions.", inline=False)
+  embedVar.set_footer(text="Admins | Novasaur")
   await ctx.send(embed=embedVar)
 
 @bot.command()
@@ -740,6 +766,7 @@ async def credits(ctx):
   embedVar.add_field(name="RandomArsenalAcc", value="- Helped with testing.", inline=False)
   embedVar.add_field(name="JMKDev", value="- Developed the ro.py module, which is used to connect this bot to Roblox.", inline=False)
   embedVar.add_field(name="Other Credits", value="This bot uses many other modules to simplify my life, such as:\n- discord.py\n- A python module to connect to Trello", inline=False)
+  embedVar.set_footer(text="Credits | Novasaur")
   await ctx.send(embed=embedVar)
 
 @bot.command()
@@ -747,9 +774,9 @@ async def noucheck(ctx,*args):
   user = ctx.author
   role = discord.utils.find(lambda r: r.name == 'NOU Agent', ctx.message.guild.roles)
   if role in (ctx.author).roles:
-    await ctx.send("you are nou person")
+    await ctx.send("You are nou person")
   else:
-    await ctx.send("no nou moment")
+    await ctx.send("You are not a nou member.")
 
 @bot.command()
 async def oldsuscheck(ctx): # suscheck based on my bl 
@@ -889,6 +916,7 @@ async def bl(ctx,*args):
         print("no")
     except:
       print("error")
+  embedVar.set_footer(text="Blacklist stage 1 | Novasaur")    
   await msgs1b.edit(embed=embedVar)
 
 
@@ -910,6 +938,7 @@ async def bl(ctx,*args):
         print("no")
     except:
       print("error")
+  embedVar.set_footer(text="Blacklist stage 2 | Novasaur")    
   await msgs2b.edit(embed=embedVar)
 
 
@@ -931,6 +960,7 @@ async def bl(ctx,*args):
         print("no")
     except:
       print("error")
+  embedVar.set_footer(text="Blacklist stage 3 | Novasaur")    
   await msgs3b.edit(embed=embedVar)
 
   await asyncio.sleep(5)
@@ -972,6 +1002,7 @@ async def blsetup(ctx):
         print("no")
     except:
       print("error")
+  embedVar.set_footer(text="Blacklist stage 1 | Novasaur")    
   await ctx.send(embed=embedVar)
 
 
@@ -993,6 +1024,7 @@ async def blsetup(ctx):
         print("no")
     except:
       print("error")
+  embedVar.set_footer(text="Blacklist stage 2 | Novasaur")    
   await ctx.send(embed=embedVar)
 
 
@@ -1014,6 +1046,7 @@ async def blsetup(ctx):
         print("no")
     except:
       print("error")
+  embedVar.set_footer(text="Blacklist stage 3 | Novasaur")    
   await ctx.send(embed=embedVar)
   adminLog("<@"+str(ctx.message.author.id)+">",str(ctx.message.content),"Blacklist Setup",ctx.message.guild,ctx.message.channel)
 
@@ -1055,6 +1088,7 @@ async def blrefresh(ctx):
         print("no")
     except:
       print("error")
+  embedVar.set_footer(text="Blacklist stage 1 | Novasaur")    
   await msgs1b.edit(embed=embedVar)
 
 
@@ -1076,6 +1110,7 @@ async def blrefresh(ctx):
         print("no")
     except:
       print("error")
+  embedVar.set_footer(text="Blacklist stage 2 | Novasaur")    
   await msgs2b.edit(embed=embedVar)
 
 
@@ -1097,6 +1132,7 @@ async def blrefresh(ctx):
         print("no")
     except:
       print("error")
+  embedVar.set_footer(text="Blacklist stage 3 | Novasaur")    
   await msgs3b.edit(embed=embedVar)
   await ctx.message.delete()
   adminLog("<@"+str(ctx.message.author.id)+">",str(ctx.message.content),"Blacklist Refresh",ctx.message.guild,ctx.message.channel)
@@ -1222,7 +1258,7 @@ async def blsearch(ctx,*args):
     embedVar.add_field(name="Blacklisted Friends", value=(str(badFriendsStr)), inline=False)
   except:
     print("error getting bad friends")
-  embedVar.set_footer(text="Requested by "+str(ctx.message.author.display_name))
+  embedVar.set_footer(text="Requested by "+str(ctx.message.author.display_name) + " | Novasaur")
   await ctx.send(embed=embedVar)
 
   for msg in [a,b,c,d,e,f,g,h]:
@@ -1312,7 +1348,7 @@ async def nousearch(ctx,*args):
     embedVar.add_field(name="Blacklisted Friends", value=(str(badFriendsStr)), inline=False)
   except:
     print("error getting bad friends")
-  embedVar.set_footer(text="Requested by "+str(ctx.message.author.display_name))
+  embedVar.set_footer(text="Requested by "+str(ctx.message.author.display_name) + " | Novasaur")
   await ctx.send(embed=embedVar)
 
   for msg in [a,b,c,d,e,f,g,h]:
@@ -1351,7 +1387,7 @@ async def poc(ctx,*args):
     return
   embedVar = discord.Embed(title="Stage 1 Blacklist",color=000000)
   embedVar.add_field(name="Triosar", value=("Being poopy"), inline=False)
-  embedVar.set_footer(text="Page 1 of 2")
+  embedVar.set_footer(text="Page 1 of 2 | Novasaur")
   sent = await ctx.send(embed=embedVar)
   await sent.add_reaction("⬅️")
   await sent.add_reaction("➡️")
@@ -1359,14 +1395,21 @@ async def poc(ctx,*args):
   
 @bot.command()
 async def poll(ctx,*args):
-  embed = discord.Embed(title=' '.join(args),description=f'Sent by: {ctx.message.author}',color=000000)  ## Added embed instead of message.
+  embed = discord.Embed(title=' '.join(args),description=f'Sent by: {ctx.message.author}',color=000000)  
+  embed.set_footer(text="Poll | Novasaur")    
   msg = await ctx.send(embed=embed)
   await msg.add_reaction("✅")
   await msg.add_reaction("❌") 
 
 @bot.command()
 async def floppa(ctx,*args):
-  await ctx.send('https://tenor.com/btFVt.gif')  ## Floppa command makes the bot more alive.
+  await ctx.send(random.choice([
+    "https://tenor.com/btvbY.gif",
+    "https://tenor.com/btFVt.gif",
+    "https://tenor.com/bthES.gif",
+    "https://tenor.com/bDsKF.gif",
+    "https://tenor.com/bC7yO.gif"
+  ]))
 
 @bot.command()
 async def granks(ctx,*args):
@@ -1431,6 +1474,7 @@ async def granks(ctx,*args):
     name = (x.name)
     val = (x.rank)
     embedVar.add_field(name=x.name, value=(x.rank), inline=False)
+  embedVar.set_footer(text="Group ranks | Novasaur")    
   await ctx.send(embed=embedVar)
 
 
