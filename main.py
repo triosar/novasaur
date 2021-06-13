@@ -879,6 +879,7 @@ async def cmds(ctx):
   embedVar.add_field(name=">untrelloban", value="[BotAdmin+] Manually untrellobans the provided Roblox username.", inline=False)
   embedVar.add_field(name=">dm <Discord user id>", value="[BotAdmin+] DMs the provided user with the provided content.\n*Report abuse of this command to Trio.*", inline=False)
   embedVar.add_field(name=">granks <group id>", value="[BotAdmin+] Fetches the group ranks of the Roblox group with the provided group ID.\nBotAdmin+ to avoid abuse.", inline=False)
+  embedVar.add_field(name=">bloxsearch <discord id>", value="[BotAdmin+] Uses the Bloxlink API to fetch the Roblox account associated with a given Discord account, if they are registered with Bloxlink.\nCurrently very crude, and only spits out/takes IDs.\nBotAdmin+ to avoid abuse.", inline=False)
   embedVar.add_field(name=">say <text>", value="[Trio] Says the provided string in chat.", inline=False)
   embedVar.add_field(name=">blsetup", value="[Trio] Setups the blacklist posts.\nNeeds internal configuration after the command is run.", inline=False)  
   embedVar.add_field(name=">blrefresh", value="[Trio] Refreshes the blacklist.\nMust be run in #rt-blacklist to function correctly.\nPrivate to prevent abuse and ratelimiting.", inline=False)
