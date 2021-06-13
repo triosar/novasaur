@@ -1627,7 +1627,7 @@ async def bloxsearch(ctx,*args):
     toSend = "`"+errorText+"`"
     await ctx.send(toSend)
   else:
-    await ctx.send("Primary account of the user is:")
+    await ctx.send("Primary ROBLOX account of the user is:")
     toSend = "`"+r["primaryAccount"]+"`"
     await ctx.send(toSend)
 
