@@ -1,6 +1,7 @@
 # Novasaur main file. - infinitypupper
 
 # Import like 4532534534543 modules
+import requests
 import os
 from ro_py import users
 from ro_py.users import User
@@ -1605,6 +1606,30 @@ async def granks(ctx,*args):
 async def dontwoof(ctx):
   await ctx.send("https://cdn.discordapp.com/attachments/657008895776129028/771842764894896138/Woof.mov")
   await ctx.message.delete()
+
+@bot.command()
+async def bloxsearch(ctx,*args):
+  if str(ctx.message.author.id) not in botadmins:
+    await ctx.send("You are not authorised to run this command.")
+    return
+
+  baseURL = "https://api.blox.link/v1/user/"
+  discID = args[0] # the discord id provided
+  discID = str(discID)
+  reqURL = baseURL + discID
+
+  r = requests.get(reqURL)
+  r = r.json() # make it accessible as a dict
+
+  if r["status"] == "error": # if the request failed
+    errorText = r["error"]
+    await ctx.send("This command failed.\nError reason is:")
+    toSend = "`"+errorText+"`"
+    await ctx.send(toSend)
+  else:
+    await ctx.send("Primary account of the user is:")
+    toSend = "`"+r["primaryAccount"]+"`"
+    await ctx.send(toSend)
 
 keep_alive.keep_alive()
 bot.run(TOKEN)
