@@ -1628,9 +1628,18 @@ async def bloxsearch(ctx,*args):
     toSend = "`"+errorText+"`"
     await ctx.send(toSend)
   else:
-    await ctx.send("Primary ROBLOX account of the user is:")
-    toSend = "`"+r["primaryAccount"]+"`"
-    await ctx.send(toSend)
+    link = "https://www.roblox.com/users/"+r["primaryAccount"]+"/profile"
+
+    embedVar = discord.Embed(title="Bloxlink Lookup", description="",color=000000)
+    
+    embedVar.add_field(name="Discord User", value="<@"+str(discID)+">", inline=False)
+    RS = os.getenv('ROBLOSECURITY')
+    roblox = Client(RS)
+    user = await roblox.get_user(int(r["primaryAccount"]))
+    currentName = user.name
+    embedVar.add_field(name="Username", value=currentName, inline=False)
+    embedVar.add_field(name="Profile Link", value=link, inline=False)
+    await ctx.send(embed=embedVar)
 
 keep_alive.keep_alive()
 bot.run(TOKEN)
