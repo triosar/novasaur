@@ -43,7 +43,7 @@ xmasTime = int(1640390400) # define christmas day as unix
 
 # Declare various lists for use.
 badwords = ['nigger','niggers','nibber','nigga','nibba','faggot','faget',' fag ','fagging','fagot','mussie','mossie',' cum','ejaculate','jerk  of','lezzo','lezbo','lezzer','lezer','lezza','leza','masturbat','molest','porn', ' rape ','rimjob','rimming','blowjob','sextoy','skank','slut','sperm','sodom','tranny','tranni','trany','trani',' wank',' wog ','retard','f@g','re3tard','cunt','c u m',' c u m','hentai','ahegao','cocaine','crackhead','whore','spunk']
-botadmins = ["315193131282726914","314394344465498122","626171285491154944","691770905835077643","340167800561860618","435457720855035914"]
+botadmins = ["315193131282726914","314394344465498122","626171285491154944","340167800561860618","435457720855035914"]
 blacklist = [] # yeah idk what this is used for
 rps_choices = ["scissors!", "rock!", "paper!"]
 serverlist = [] # server names
