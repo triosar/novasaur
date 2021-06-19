@@ -873,7 +873,7 @@ async def cmds(ctx):
 
   embedVar = discord.Embed(title="Restricted Commands (NS/management-related)", description="Some commands are not shown here as they are legacy commands kept as a backup.",color=000000)
   embedVar.add_field(name=">blsearch <username>", value="[RT+/ADV+] Allows lookup of a user, showing blacklist and trelloban status.\nMust be run in rt-bot-commands.", inline=False)
-  embedVar.add_field(name=">bl <username> <stage> <reason>", value="[BotAdmin+] Allows blacklist status of a user to be modified.\nMust be run in #rt-blacklist to function correctly.", inline=False)
+  embedVar.add_field(name=">bl <username> <stage> <reason>", value="[BotAdmin+] Allows blacklist status of a user to be modified.", inline=False)
   embedVar.add_field(name=">logout", value="[BotAdmin+] Disconnects the bot from Discord temporarily.\nOnly use in emergencies/when told to by Trio or fat.", inline=False)
   embedVar.add_field(name=">trelloban", value="[BotAdmin+] Manually trellobans the provided Roblox username.", inline=False)
   embedVar.add_field(name=">untrelloban", value="[BotAdmin+] Manually untrellobans the provided Roblox username.", inline=False)
