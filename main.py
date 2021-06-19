@@ -325,7 +325,7 @@ async def on_ready():
       #await server.leave() #activate this to leave all servers
     #inv = await (bot.get_channel(747581697826095260)).create_invite()
     #await user.send(inv)
-    await blListRefresh()
+    #await blListRefresh()
     await bot.get_channel(832614393279283211).send("Blacklist refreshed...")
     await checkQ()
 
@@ -1022,81 +1022,89 @@ async def bl(ctx,*args):
   i = await ctx.send("Command done!\n*These messages will be deleted shortly.*")
   toClear.append(i)  
   
-  msgs1b = await ctx.fetch_message(840137392991502368)
-  msgs2b = await ctx.fetch_message(840137407873679420)
-  msgs3b = await ctx.fetch_message(840137436343566399)
+  embedVar = discord.Embed(title="New Blacklist Change",color=000000)
+  embedVar.add_field(name="Username", value=username, inline=False)
+  embedVar.add_field(name="New Stage", value=newStage, inline=False)
+  embedVar.add_field(name="Reason", value=reason, inline=False)
+  embedVar.add_field(name="Issuer", value="<@"+str(ctx.message.author.id)+">", inline=False)
+  await bot.get_channel(854256816229974026).send(embed=embedVar)
 
 
-  TRELLO_APP_KEY = os.getenv('TRELLO_APP_KEY')
-  TOKEN = os.getenv('TOKEN')
-  listID = "6093ccae8f0a0a4e409fa1ce"
-  trello = TrelloApi(TRELLO_APP_KEY, TOKEN)
-  cardList = trello.lists.get_card(listID)
+  # msgs1b = await ctx.fetch_message(840137392991502368)
+  # msgs2b = await ctx.fetch_message(840137407873679420)
+  # msgs3b = await ctx.fetch_message(840137436343566399)
 
 
-  embedVar = discord.Embed(title="Stage 1 Blacklist",color=000000)
-  for x in cardList:
-    try:
-      print(x["name"])
-      ID = (str(x["name"].split(":")[0]))
-      stage = (str(x["name"].split(":")[1]))
-      if str(stage) == "1":
-        print("yes")
-        RS = os.getenv('ROBLOSECURITY')
-        roblox = Client(RS)
-        user = await roblox.get_user(int(ID))
-        currentName = user.name
-        embedVar.add_field(name=currentName, value=((str(x["name"].split(":")[2]))), inline=False)
-        print("added")
-      else:
-        print("no")
-    except:
-      print("error")
-  await msgs1b.edit(embed=embedVar)
+  # TRELLO_APP_KEY = os.getenv('TRELLO_APP_KEY')
+  # TOKEN = os.getenv('TOKEN')
+  # listID = "6093ccae8f0a0a4e409fa1ce"
+  # trello = TrelloApi(TRELLO_APP_KEY, TOKEN)
+  # cardList = trello.lists.get_card(listID)
 
 
-  embedVar = discord.Embed(title="Stage 2 Blacklist",color=000000)
-  for x in cardList:
-    try:
-      print(x["name"])
-      ID = (str(x["name"].split(":")[0]))
-      stage = (str(x["name"].split(":")[1]))
-      if str(stage) == "2":
-        print("yes")
-        RS = os.getenv('ROBLOSECURITY')
-        roblox = Client(RS)
-        user = await roblox.get_user(int(ID))
-        currentName = user.name
-        embedVar.add_field(name=currentName, value=((str(x["name"].split(":")[2]))), inline=False)
-        print("added")
-      else:
-        print("no")
-    except:
-      print("error")
-  await msgs2b.edit(embed=embedVar)
+  # embedVar = discord.Embed(title="Stage 1 Blacklist",color=000000)
+  # for x in cardList:
+  #   try:
+  #     print(x["name"])
+  #     ID = (str(x["name"].split(":")[0]))
+  #     stage = (str(x["name"].split(":")[1]))
+  #     if str(stage) == "1":
+  #       print("yes")
+  #       RS = os.getenv('ROBLOSECURITY')
+  #       roblox = Client(RS)
+  #       user = await roblox.get_user(int(ID))
+  #       currentName = user.name
+  #       embedVar.add_field(name=currentName, value=((str(x["name"].split(":")[2]))), inline=False)
+  #       print("added")
+  #     else:
+  #       print("no")
+  #   except:
+  #     print("error")
+  # await msgs1b.edit(embed=embedVar)
 
 
-  embedVar = discord.Embed(title="Stage 3 Blacklist",color=000000)
-  for x in cardList:
-    try:
-      print(x["name"])
-      ID = (str(x["name"].split(":")[0]))
-      stage = (str(x["name"].split(":")[1]))
-      if str(stage) == "3":
-        print("yes")
-        RS = os.getenv('ROBLOSECURITY')
-        roblox = Client(RS)
-        user = await roblox.get_user(int(ID))
-        currentName = user.name
-        embedVar.add_field(name=currentName, value=((str(x["name"].split(":")[2]))), inline=False)
-        print("added")
-      else:
-        print("no")
-    except:
-      print("error")
-  await msgs3b.edit(embed=embedVar)
+  # embedVar = discord.Embed(title="Stage 2 Blacklist",color=000000)
+  # for x in cardList:
+  #   try:
+  #     print(x["name"])
+  #     ID = (str(x["name"].split(":")[0]))
+  #     stage = (str(x["name"].split(":")[1]))
+  #     if str(stage) == "2":
+  #       print("yes")
+  #       RS = os.getenv('ROBLOSECURITY')
+  #       roblox = Client(RS)
+  #       user = await roblox.get_user(int(ID))
+  #       currentName = user.name
+  #       embedVar.add_field(name=currentName, value=((str(x["name"].split(":")[2]))), inline=False)
+  #       print("added")
+  #     else:
+  #       print("no")
+  #   except:
+  #     print("error")
+  # await msgs2b.edit(embed=embedVar)
 
-  await asyncio.sleep(5)
+
+  # embedVar = discord.Embed(title="Stage 3 Blacklist",color=000000)
+  # for x in cardList:
+  #   try:
+  #     print(x["name"])
+  #     ID = (str(x["name"].split(":")[0]))
+  #     stage = (str(x["name"].split(":")[1]))
+  #     if str(stage) == "3":
+  #       print("yes")
+  #       RS = os.getenv('ROBLOSECURITY')
+  #       roblox = Client(RS)
+  #       user = await roblox.get_user(int(ID))
+  #       currentName = user.name
+  #       embedVar.add_field(name=currentName, value=((str(x["name"].split(":")[2]))), inline=False)
+  #       print("added")
+  #     else:
+  #       print("no")
+  #   except:
+  #     print("error")
+  # await msgs3b.edit(embed=embedVar)
+
+  # await asyncio.sleep(5)
 
 
 
@@ -1116,7 +1124,6 @@ async def blsetup(ctx):
   trello = TrelloApi(TRELLO_APP_KEY, TOKEN)
   cardList = trello.lists.get_card(listID)
 
-
   embedVar = discord.Embed(title="Stage 1 Blacklist",color=000000)
   for x in cardList:
     try:
@@ -1136,8 +1143,8 @@ async def blsetup(ctx):
     except:
       print("error")
   await ctx.send(embed=embedVar)
-
-
+  await ctx.send("sleeping")
+  await asyncio.sleep(10)
   embedVar = discord.Embed(title="Stage 2 Blacklist",color=000000)
   for x in cardList:
     try:
@@ -1158,7 +1165,8 @@ async def blsetup(ctx):
       print("error")
   await ctx.send(embed=embedVar)
 
-
+  await ctx.send("sleeping")
+  await asyncio.sleep(10)
   embedVar = discord.Embed(title="Stage 3 Blacklist",color=000000)
   for x in cardList:
     try:
@@ -1306,8 +1314,8 @@ async def transfer(ctx):
 @bot.command()
 async def blsearch(ctx,*args):
   toClear = []
-  if str(ctx.message.channel.id) != "832652981659893820":
-    await ctx.send("This command can only be used in <#832652981659893820>.")
+  if str(ctx.message.channel.category_id) != "714318158462451720":
+    await ctx.send("This command can only be used in the HR channels in the NSET guild.")
     return
   name = ' '.join(args)
   name = str(name)
