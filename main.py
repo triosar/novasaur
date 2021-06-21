@@ -61,7 +61,7 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 def clearUser(name):
   TRELLO_APP_KEY = os.getenv('TRELLO_APP_KEY')
   TOKEN = os.getenv('TOKEN')
-  listID = "6093ccae8f0a0a4e409fa1ce"
+  listID = "60d0e57d4082b12004214eee"
   
   trello = TrelloApi(TRELLO_APP_KEY, TOKEN)
 
@@ -124,7 +124,7 @@ async def blListRefresh():
 
   TRELLO_APP_KEY = os.getenv('TRELLO_APP_KEY')
   TOKEN = os.getenv('TOKEN')
-  listID = "6093ccae8f0a0a4e409fa1ce"
+  listID = "60d0e57d4082b12004214eee"
   
   trello = TrelloApi(TRELLO_APP_KEY, TOKEN)
 
@@ -595,7 +595,7 @@ async def oldbl(ctx, *args):
   if stage == "3":
     TRELLO_APP_KEY = os.getenv('TRELLO_APP_KEY')
     TOKEN = os.getenv('TOKEN')
-    listID = "600ed147a982530da7b48b87"             #the id for your list 
+    listID = "60d0e57d4082b12004214eee"             #the id for your list 
     cardPos = "bottom"
 
     trello = TrelloApi(TRELLO_APP_KEY, TOKEN)
@@ -608,7 +608,7 @@ async def oldbl(ctx, *args):
   elif (stage == "1") or (stage == "2") or (stage == "0"):
     TRELLO_APP_KEY = os.getenv('TRELLO_APP_KEY')
     TOKEN = os.getenv('TOKEN')
-    listID = "600ed147a982530da7b48b87"             #the id for your list 
+    listID = "60d0e57d4082b12004214eee"             #the id for your list 
     cardPos = "bottom"
     trello = TrelloApi(TRELLO_APP_KEY, TOKEN)
     print("Looking for cards with that name...")
@@ -739,7 +739,7 @@ async def trelloban(ctx):
     return
   TRELLO_APP_KEY = os.getenv('TRELLO_APP_KEY')
   TOKEN = os.getenv('TOKEN')
-  listID = "600ed147a982530da7b48b87"             #the id for your list 
+  listID = "60d0e57d4082b12004214eee"             #the id for your list 
   cardPos = "bottom"
 
   trello = TrelloApi(TRELLO_APP_KEY, TOKEN)
@@ -781,7 +781,7 @@ async def untrelloban(ctx):
     return
   TRELLO_APP_KEY = os.getenv('TRELLO_APP_KEY')
   TOKEN = os.getenv('TOKEN')
-  listID = "600ed147a982530da7b48b87"             #the id for your list 
+  listID = "60d0e57d4082b12004214eee"             #the id for your list 
   cardPos = "bottom"
   trello = TrelloApi(TRELLO_APP_KEY, TOKEN)
 
@@ -811,7 +811,7 @@ async def oldblsearch(ctx,args):
 
   TRELLO_APP_KEY = os.getenv('TRELLO_APP_KEY')
   TOKEN = os.getenv('TOKEN')
-  listID = "600ed147a982530da7b48b87"             #the id for your list 
+  listID = "60d0e57d4082b12004214eee"             #the id for your list 
   cardPos = "bottom"
   trello = TrelloApi(TRELLO_APP_KEY, TOKEN)
   cardList = trello.lists.get_card(listID)
@@ -986,7 +986,7 @@ async def bl(ctx,*args):
   if str(newStage) == "3":
     e = await ctx.send("Adding new card to trello-ban list..")
     toClear.append(e)
-    listID = "600ed147a982530da7b48b87"
+    listID = "60d0e57d4082b12004214eee"
     title = str(username)+":"+str(userID)
     try:
       newCard = trello.cards.new(title, idList=listID, desc=description, pos=cardPos)
@@ -995,7 +995,7 @@ async def bl(ctx,*args):
     f = await ctx.send("Card added!")
     toClear.append(f)
   else:
-    listID = "600ed147a982530da7b48b87"
+    listID = "60d0e57d4082b12004214eee"
     e = await ctx.send("Checking if user is trello-banned...")
     toClear.append(e)
     try:
@@ -1338,7 +1338,7 @@ async def blsearch(ctx,*args):
   TRELLO_APP_KEY = os.getenv('TRELLO_APP_KEY')
   TOKEN = os.getenv('TOKEN')
   trello = TrelloApi(TRELLO_APP_KEY, TOKEN)
-  listIDBans = "600ed147a982530da7b48b87"
+  listIDBans = "60d0e57d4082b12004214eee"
   listIDBL = "6093ccae8f0a0a4e409fa1ce"
 
   c = await ctx.send("Fetching Trello lists... <a:loading:841014732529598495>")
@@ -1428,7 +1428,7 @@ async def nousearch(ctx,*args):
   TRELLO_APP_KEY = os.getenv('TRELLO_APP_KEY')
   TOKEN = os.getenv('TOKEN')
   trello = TrelloApi(TRELLO_APP_KEY, TOKEN)
-  listIDBans = "600ed147a982530da7b48b87"
+  listIDBans = "60d0e57d4082b12004214eee"
   listIDBL = "6093ccae8f0a0a4e409fa1ce"
 
   c = await ctx.send("Fetching Trello lists... <a:loading:841014732529598495>")
