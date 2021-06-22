@@ -55,7 +55,7 @@ print(starttime)
 
 #load from .env
 load_dotenv()
-TOKEN = os.getenv('DISCORD_TOKEN')
+DISCTOKEN = os.getenv('DISCORD_TOKEN')
 
 # function to delete a card from the trelloban list
 def clearUser(name):
@@ -1650,4 +1650,4 @@ async def bloxsearch(ctx,*args):
     await ctx.send(embed=embedVar)
 
 keep_alive.keep_alive()
-bot.run(TOKEN)
+bot.run(DISCTOKEN)
