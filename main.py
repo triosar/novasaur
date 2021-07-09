@@ -333,6 +333,13 @@ async def on_ready():
 @bot.event
 async def on_message(message):
 
+# floppa, sealed forever
+#  if "floppa" in str(message.content).lower():
+#    if str(message.author.id) in botadmins:
+#      await message.add_reaction("😡")
+#    else:
+#      await message.delete()
+
   if message.author == bot.user:
     return
 
