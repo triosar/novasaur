@@ -352,7 +352,9 @@ async def on_message(message):
     return
 
   if "amogus" in str(message.content).lower():
-    await message.add_reaction("<:red:760064755649347604>")
+    await message.add_reaction("<:amogus:866762606085406730>")
+  if "sus" in str(message.content).lower():
+    await message.add_reaction("<:amogus:866762606085406730>")
 
   if "owo" in str(message.content).lower():
     toSend = random.choice([
