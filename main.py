@@ -434,7 +434,7 @@ async def on_message(message):
     embedVar.add_field(name="Entire Message:",value = total,inline=False)
     embedVar.set_footer(text="Autofilter | Novasaur")
     if botAdminSlur:
-        embedVar.set_footer(text="BotAdmin violation - the violating message was not deleted.")
+        embedVar.set_footer(text="Owner violation - the violating message was not deleted.")
       
     response = "Please don't use words like **"+phrase+"**!"
     channel = bot.get_channel(834397212481028136)
