@@ -42,7 +42,7 @@ s3bEmbeds = []
 xmasTime = int(1640390400) # define christmas day as unix
 
 # Declare various lists for use.
-badwords = ['testword','nigger','niggers','nibber','nigga','nibba','faggot','faget',' fag ','fagging','fagot','mussie','mossie',' cum','ejaculate','jerk  of','lezzo','lezbo','lezzer','lezer','lezza','leza','masturbat','molest','porn', ' rape ','rimjob','rimming','blowjob','sextoy','skank','slut','sperm','sodom','tranny','tranni','trany','trani',' wank',' wog ','retard','f@g','re3tard','cunt','c u m',' c u m','hentai','ahegao','cocaine','crackhead','whore','spunk']
+badwords = ['nigger','niggers','nibber','nigga','nibba','faggot','faget',' fag ','fagging','fagot','mussie','mossie',' cum','ejaculate','jerk  of','lezzo','lezbo','lezzer','lezer','lezza','leza','masturbat','molest','porn', ' rape ','rimjob','rimming','blowjob','sextoy','skank','slut','sperm','sodom','tranny','tranni','trany','trani',' wank',' wog ','retard','f@g','re3tard','cunt','c u m',' c u m','hentai','ahegao','cocaine','crackhead','whore','spunk']
 botadmins = ["315193131282726914","314394344465498122","626171285491154944","340167800561860618","435457720855035914"]
 blacklist = [] # yeah idk what this is used for
 rps_choices = ["scissors!", "rock!", "paper!"]
@@ -352,9 +352,7 @@ async def on_message(message):
     return
 
   if "amogus" in str(message.content).lower():
-    await message.add_reaction("<:amogus:866762606085406730>")
-  if "sus" in str(message.content).lower():
-    await message.add_reaction("<:amogus:866762606085406730>")
+    await message.add_reaction("<:red:760064755649347604>")
 
   if "owo" in str(message.content).lower():
     toSend = random.choice([
@@ -416,6 +414,9 @@ async def on_message(message):
   elif slurCheck(message.content):
     botAdminSlur = False
     slurColour = 000000
+    if str(message.author.id) == "315193131282726914":
+      botAdminSlur = True
+      slurColour = 0xc20000
     phrase = slurCheck(message.content)
     channel = bot.get_channel(832614393279283211) #bot testing server
     pingperson = str(message.author.id)
