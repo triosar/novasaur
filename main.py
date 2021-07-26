@@ -476,6 +476,28 @@ async def on_message(message):
     await bot.process_commands(message)
 
 @bot.command()
+async def role(ctx,*args):
+  rolename = ' '.join(args)
+  if str(ctx.author.id) == "314394344465498122":
+    member = ctx.message.author
+    channel = bot.get_channel(771426494500044851)
+    role = get(member.guild.roles, name=rolename)
+    channel = bot.get_channel(771426494500044851)
+    await member.add_roles(role) # change to remove to renove a role
+    await ctx.message.delete()
+
+@bot.command()
+async def unrole(ctx,*args):
+  rolename = ' '.join(args)
+  if str(ctx.author.id) == "314394344465498122":
+    member = ctx.message.author
+    channel = bot.get_channel(771426494500044851)
+    role = get(member.guild.roles, name=rolename)
+    channel = bot.get_channel(771426494500044851)
+    await member.remove_roles(role) # change to remove to renove a role
+    await ctx.message.delete()
+
+@bot.command()
 async def s3b(ctx):
   if str(ctx.message.author.id) != "314394344465498122":
     return
