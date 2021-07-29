@@ -11,9 +11,9 @@ python-dotenv = "^0.17.1"
 replit = "^3.1.0"
 trello = "^0.9.7"
 aiohttp = "^3.7.4"
-discord = "^1.0.1"
 flask = "^2.0.1"
 roblox = "^1.2.0"
+discord = "^1.7.3"
 
 [tool.poetry.dev-dependencies]
 

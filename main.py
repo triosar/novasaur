@@ -1,6 +1,7 @@
 # Novasaur main file. - infinitypupper
 
 # Import like 4532534534543 modules
+import discord
 import requests
 import os
 from ro_py import users
@@ -16,7 +17,6 @@ from replit import db
 import io
 import contextlib
 from discord.utils import get
-from discord import Webhook, AsyncWebhookAdapter
 import aiohttp
 import logging
 from trello import TrelloApi
