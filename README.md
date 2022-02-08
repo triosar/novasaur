@@ -1,4 +1,7 @@
 # Novasaur
+
+# This project is no longer being worked on. You are welcome to reuse code as long as I am attributed. 
+
 Novasaur is an open-source Discord bot designed for use within the Nova Incorporated community.
 Keep in mind my code is **very** messy, but I'll look at improving tidiness and readability in the future.
 
